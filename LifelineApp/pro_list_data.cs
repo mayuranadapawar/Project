@@ -33,7 +33,7 @@ namespace LifelineApp
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -43,6 +43,11 @@ namespace LifelineApp
         }
 
         private void pro_list_data_Load(object sender, EventArgs e)
+        {
+            data();
+        }
+
+        public void data()
         {
             con.Open();
             da = new MySqlDataAdapter("select * from prodlist", con);
@@ -61,7 +66,7 @@ namespace LifelineApp
             this.Hide();
             form_dashboard fd1 = new form_dashboard();
             fd1.Show();
-           
+
         }
         private void dgv_product_data_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -69,7 +74,7 @@ namespace LifelineApp
             {
                 updt_prodlist up1 = new updt_prodlist();
                 up1.textBox1_id.Text = this.dgv_product_data.CurrentRow.Cells[0].Value.ToString();
-                up1.textBox2_name.Text= this.dgv_product_data.CurrentRow.Cells[1].Value.ToString();
+                up1.textBox2_name.Text = this.dgv_product_data.CurrentRow.Cells[1].Value.ToString();
                 up1.textBox3_hsn.Text = this.dgv_product_data.CurrentRow.Cells[2].Value.ToString();
                 up1.textBox4_pack.Text = this.dgv_product_data.CurrentRow.Cells[3].Value.ToString();
                 up1.comboBox1_unit.Text = this.dgv_product_data.CurrentRow.Cells[4].Value.ToString();
@@ -77,8 +82,9 @@ namespace LifelineApp
                 up1.textBox7_cgst.Text = this.dgv_product_data.CurrentRow.Cells[6].Value.ToString();
                 up1.textBox8_sgst.Text = this.dgv_product_data.CurrentRow.Cells[7].Value.ToString();
                 up1.textBox9_igst.Text = this.dgv_product_data.CurrentRow.Cells[8].Value.ToString();
-                up1.comboBox2_isonline.Text= this.dgv_product_data.CurrentRow.Cells[11].Value.ToString();
+                up1.comboBox2_isonline.Text = this.dgv_product_data.CurrentRow.Cells[11].Value.ToString();
                 up1.ShowDialog();
+                this.Close();
             }
         }
     }

@@ -52,15 +52,15 @@ namespace LifelineApp
                 MessageBox.Show("DATA update SUCCESFULLY");
                 
                 con.Close();
+                this.Close();
+                pro_list_data p = new pro_list_data();
+                p.data();
+                p.Show();
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            pro_list_data pld1 = new pro_list_data();
-            pld1.Show();
-
             
         }
     }

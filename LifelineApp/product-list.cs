@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using System.Data;
+
 
 
 
@@ -47,6 +47,9 @@ namespace LifelineApp
             cmd.ExecuteNonQuery();
             MessageBox.Show("product details inserted");
             con.Close();
+            this.Close();
+            pro_list_data pd = new pro_list_data();
+            pd.Show();
         }
 
         private void product_list_Load(object sender, EventArgs e)
