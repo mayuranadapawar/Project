@@ -32,7 +32,7 @@ namespace LifelineApp
             InitializeComponent();
         }
 
-        private void combobox_1p_SelectedIndexChanged(object sender, EventArgs e)
+        private void combobox_1p_SelectedIndexChanged(object sender, EventArgs e) 
         {
             if (combobox_1p.SelectedIndex != -1)
             {
