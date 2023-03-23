@@ -91,8 +91,21 @@ namespace LifelineApp
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int a = 0;
+            if (cb1.Text.Equals("Percentage"))
+            {
+                a = Int32.Parse(textBox6_dis.Text);
+                int b = Int32.Parse(textBox_total.Text);
+                a = (a * b) / 100;
+
+            }
+            if (cb1.Text.Equals("Cash"))
+            {
+                a = Int32.Parse(textBox6_dis.Text);
+            }
+
             con.Open();
-            string s = "insert into podetails(po_id,batch_no,expiry,mrp,rate,qty,total,discount,free_qty) values('" + textBox_pid.Text + "'," + textBox1_batch.Text + ",'" + textBox2_ex.Text + "','" + textBox3_MRP.Text + "','" + textBox4_rate.Text + "','" + textBox5_qty.Text + "','" + textBox_total.Text + "','" + textBox6_dis.Text + "','" + textBox7_free.Text + "')";
+            string s = "insert into podetails(po_id,batch_no,expiry,mrp,rate,qty,total,discount,free_qty) values('" + textBox_pid.Text + "'," + textBox1_batch.Text + ",'" + textBox2_ex.Text + "','" + textBox3_MRP.Text + "','" + textBox4_rate.Text + "','" + textBox5_qty.Text + "','" + textBox_total.Text + "','" + a + "','" + textBox7_free.Text + "')";
             cmd = new MySqlCommand(s, con);
             cmd.ExecuteNonQuery();
             MessageBox.Show("Delear  details inserted");
@@ -106,10 +119,64 @@ namespace LifelineApp
 
         private void textBox5_qty_Leave(object sender, EventArgs e)
         {
-            int a = Int32.Parse(textBox4_rate.Text);
-            int b = Int32.Parse(textBox5_qty.Text);
-            int total = a * b;
-            textBox_total.Text = "" + total;
+            if (textBox5_qty.Text.Equals("") || textBox4_rate.Text.Equals(""))
+            {
+                /*
+                int a = Int32.Parse(textBox4_rate.Text);
+                int b = Int32.Parse(textBox5_qty.Text);
+                int total = a * b;
+                textBox_total.Text = "" + total;
+                */
+            }
+            else
+            {
+                int a = Int32.Parse(textBox4_rate.Text);
+                int b = Int32.Parse(textBox5_qty.Text);
+                int total = a * b;
+                textBox_total.Text = "" + total;
+            }
+        }
+
+        private void textBox4_rate_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_rate_FontChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_rate_MouseLeave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_rate_Leave(object sender, EventArgs e)
+        {
+
+            if (textBox5_qty.Text.Equals("") || textBox4_rate.Text.Equals(""))
+            {
+                /*
+                int a = Int32.Parse(textBox4_rate.Text);
+                int b = Int32.Parse(textBox5_qty.Text);
+                int total = a * b;
+                textBox_total.Text = "" + total;
+                */
+            }
+            else
+            {
+                
+                int a = Int32.Parse(textBox4_rate.Text);
+                int b = Int32.Parse(textBox5_qty.Text);
+                int total = a * b;
+                textBox_total.Text = "" + total;
+            }
+        }
+
+        private void textBox5_qty_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

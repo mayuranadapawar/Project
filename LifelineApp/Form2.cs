@@ -30,7 +30,7 @@ namespace LifelineApp
         private void form_dashboard_Load(object sender, EventArgs e)
         {
             MessageBox.Show("WELCOME " + globals.username);
-            user_name_set.Text= "WELCOME " + globals.username;
+            user_name_set.Text = globals.username;
 
 
         }
@@ -40,6 +40,16 @@ namespace LifelineApp
             this.Hide();
             dlrmaster_data dlmd = new dlrmaster_data();
             dlmd.Show();
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }

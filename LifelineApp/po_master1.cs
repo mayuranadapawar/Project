@@ -142,19 +142,28 @@ namespace LifelineApp
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+            if (dataGridView1.SelectedRows.Count>0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
 
-            // Get the ID of the selected row from the underlying data source
-            int id = Convert.ToInt32(selectedRow.Cells["po_id"].Value);
-            con.Open();
+           
+                // Get the ID of the selected row from the underlying data source
+                int id = Convert.ToInt32(selectedRow.Cells["po_id"].Value);
+                con.Open();
 
-            string s = "delete from podetails where po_id='" + id + "'";
-            cmd = new MySqlCommand(s, con);
-            cmd.ExecuteNonQuery();
+                string s = "delete from podetails where po_id='" + id + "'";
+                cmd = new MySqlCommand(s, con);
+                cmd.ExecuteNonQuery();
 
-            con.Close();
-            updatedata();
-            MessageBox.Show("Record deleted!");
+                con.Close();
+                updatedata();
+                MessageBox.Show("Record deleted!");
+
+            }
+            else 
+            {
+                MessageBox.Show("Please Select the row first");
+            }
         }
     }
 }

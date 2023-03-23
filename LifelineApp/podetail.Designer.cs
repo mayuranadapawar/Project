@@ -48,6 +48,7 @@
             textBox_total = new TextBox();
             label11 = new Label();
             textBox_pid = new TextBox();
+            cb1 = new ComboBox();
             SuspendLayout();
             // 
             // label1
@@ -124,6 +125,7 @@
             textBox5_qty.Name = "textBox5_qty";
             textBox5_qty.Size = new Size(150, 23);
             textBox5_qty.TabIndex = 10;
+            textBox5_qty.TextChanged += textBox5_qty_TextChanged;
             textBox5_qty.Leave += textBox5_qty_Leave;
             // 
             // label5
@@ -154,6 +156,10 @@
             textBox4_rate.Name = "textBox4_rate";
             textBox4_rate.Size = new Size(150, 23);
             textBox4_rate.TabIndex = 15;
+            textBox4_rate.FontChanged += textBox4_rate_FontChanged;
+            textBox4_rate.TextChanged += textBox4_rate_TextChanged;
+            textBox4_rate.Leave += textBox4_rate_Leave;
+            textBox4_rate.MouseLeave += textBox4_rate_MouseLeave;
             // 
             // textBox3_MRP
             // 
@@ -241,11 +247,22 @@
             textBox_pid.Size = new Size(15, 23);
             textBox_pid.TabIndex = 22;
             // 
+            // cb1
+            // 
+            cb1.Anchor = AnchorStyles.None;
+            cb1.FormattingEnabled = true;
+            cb1.Items.AddRange(new object[] { "Percentage", "Cash" });
+            cb1.Location = new Point(930, 126);
+            cb1.Name = "cb1";
+            cb1.Size = new Size(85, 23);
+            cb1.TabIndex = 23;
+            // 
             // podetail
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1045, 562);
+            Controls.Add(cb1);
             Controls.Add(textBox_pid);
             Controls.Add(textBox_total);
             Controls.Add(label11);
@@ -296,5 +313,7 @@
         public TextBox textBox7_free;
         public TextBox textBox_total;
         public TextBox textBox_pid;
+        private ComboBox comboBox1;
+        private ComboBox cb1;
     }
 }
