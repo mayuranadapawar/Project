@@ -44,6 +44,7 @@
             label5 = new Label();
             label6 = new Label();
             label8 = new Label();
+            ft = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -210,11 +211,21 @@
             label8.Size = new Size(0, 15);
             label8.TabIndex = 21;
             // 
+            // ft
+            // 
+            ft.Anchor = AnchorStyles.None;
+            ft.AutoSize = true;
+            ft.Location = new Point(309, 552);
+            ft.Name = "ft";
+            ft.Size = new Size(0, 15);
+            ft.TabIndex = 22;
+            // 
             // po_master1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1142, 637);
+            Controls.Add(ft);
             Controls.Add(label8);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -258,5 +269,6 @@
         private Label label5;
         private Label label6;
         private Label label8;
+        private Label ft;
     }
 }

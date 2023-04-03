@@ -49,6 +49,8 @@
             label11 = new Label();
             textBox_pid = new TextBox();
             cb1 = new ComboBox();
+            label2 = new Label();
+            tb1 = new TextBox();
             SuspendLayout();
             // 
             // label1
@@ -257,11 +259,31 @@
             cb1.Size = new Size(85, 23);
             cb1.TabIndex = 23;
             // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.None;
+            label2.AutoSize = true;
+            label2.Location = new Point(595, 373);
+            label2.Name = "label2";
+            label2.Size = new Size(27, 15);
+            label2.TabIndex = 24;
+            label2.Text = "GST";
+            // 
+            // tb1
+            // 
+            tb1.Anchor = AnchorStyles.None;
+            tb1.Location = new Point(688, 373);
+            tb1.Name = "tb1";
+            tb1.Size = new Size(191, 23);
+            tb1.TabIndex = 25;
+            // 
             // podetail
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1045, 562);
+            Controls.Add(tb1);
+            Controls.Add(label2);
             Controls.Add(cb1);
             Controls.Add(textBox_pid);
             Controls.Add(textBox_total);
@@ -315,5 +337,7 @@
         public TextBox textBox_pid;
         private ComboBox comboBox1;
         private ComboBox cb1;
+        private Label label2;
+        private TextBox tb1;
     }
 }

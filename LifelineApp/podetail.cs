@@ -15,6 +15,7 @@ namespace LifelineApp
 {
     public partial class podetail : Form
     {
+        double c, d, fgt, tt;
 
         MySqlConnection con = new MySqlConnection("server=115.96.168.103;user=prj131;pwd=prj131@lifeline;database=prj131lifeline;port=3306");
         MySqlDataAdapter da;
@@ -36,7 +37,7 @@ namespace LifelineApp
         {
             if (combobox_1p.SelectedIndex != -1)
             {
-                cmd = new MySqlCommand("select id from prodlist where name='" + combobox_1p.Text + "'", con);
+                cmd = new MySqlCommand("select id,sgst,cgst from prodlist where name='" + combobox_1p.Text + "'", con);
                 con.Open();
                 dr = cmd.ExecuteReader();
                 if (dr.HasRows)
@@ -44,6 +45,10 @@ namespace LifelineApp
                     while (dr.Read())
                     {
                         ProductID = dr[0].ToString();
+                        c = Double.Parse(dr[1].ToString());
+                        d = Double.Parse(dr[2].ToString());
+                        tb1.Text = (c + d).ToString();
+                        fgt = c + d;
                     }
                     dr.Close();
                 }
@@ -72,11 +77,35 @@ namespace LifelineApp
                 while (dr.Read())
                 {
                     combobox_1p.Items.Add(dr[0].ToString());
+                    // a = dr[1].ToString();
+                    //string b = dr[2].ToString();
+                    //tb1.Text = b;
+                    // tb1.Text = (a + b).ToString();
                 }
                 dr.Close();
             }
             dr.Close();
             con.Close();
+            /*cmd = new MySqlCommand("select cgst,sgst from prodlist where name= '" + combobox_1p.Text + "'", con);
+            con.Open();
+            dr = cmd.ExecuteReader();
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+
+                    // a = dr[1].ToString();
+                    //string a = dr[0].ToString();
+                    //string b = dr[1].ToString();
+                    int c = Convert.ToInt32(dr[0].ToString());
+                    int d = Convert.ToInt32(dr[1].ToString());
+                    tb1.Text = (c + d).ToString();
+                    // tb1.Text = (a + b).ToString();
+                }
+                dr.Close();
+            }
+            dr.Close();
+            con.Close();*/
         }
 
         private void comboBox_d_SelectedIndexChanged(object sender, EventArgs e)
@@ -91,24 +120,27 @@ namespace LifelineApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int a = 0;
+            double a = 0;
+            tt = Double.Parse(textBox_total.Text);
             if (cb1.Text.Equals("Percentage"))
             {
-                a = Int32.Parse(textBox6_dis.Text);
-                int b = Int32.Parse(textBox_total.Text);
-                a = (a * b) / 100;
+                a = Double.Parse(textBox6_dis.Text);
+                a = (a * tt) / 100;
 
             }
             if (cb1.Text.Equals("Cash"))
             {
-                a = Int32.Parse(textBox6_dis.Text);
+                a = Double.Parse(textBox6_dis.Text);
             }
-
+            
+            tt = tt - a;
+            fgt = (tt * fgt) / 100;
+            fgt = fgt + tt;
             con.Open();
-            string s = "insert into podetails(po_id,batch_no,expiry,mrp,rate,qty,total,discount,free_qty) values('" + textBox_pid.Text + "'," + textBox1_batch.Text + ",'" + textBox2_ex.Text + "','" + textBox3_MRP.Text + "','" + textBox4_rate.Text + "','" + textBox5_qty.Text + "','" + textBox_total.Text + "','" + a + "','" + textBox7_free.Text + "')";
+            string s = "insert into podetails(po_id,batch_no,expiry,mrp,rate,qty,total,discount,cgst,sgst,gst_total,free_qty) values('" + textBox_pid.Text + "'," + textBox1_batch.Text + ",'" + textBox2_ex.Text + "','" + textBox3_MRP.Text + "','" + textBox4_rate.Text + "','" + textBox5_qty.Text + "','" + textBox_total.Text + "','" + a + "','" + d + "','" + c + "','" + fgt + "','" + textBox7_free.Text + "')";
             cmd = new MySqlCommand(s, con);
             cmd.ExecuteNonQuery();
-            MessageBox.Show("Delear  details inserted");
+            MessageBox.Show("Dealer details inserted");
             con.Close();
 
             this.Close();
@@ -130,10 +162,10 @@ namespace LifelineApp
             }
             else
             {
-                int a = Int32.Parse(textBox4_rate.Text);
-                int b = Int32.Parse(textBox5_qty.Text);
-                int total = a * b;
-                textBox_total.Text = "" + total;
+                double a = Double.Parse(textBox4_rate.Text);
+                double b = Double.Parse(textBox5_qty.Text);
+                double total = a * b;
+                textBox_total.Text = total.ToString();
             }
         }
 
@@ -166,11 +198,11 @@ namespace LifelineApp
             }
             else
             {
-                
-                int a = Int32.Parse(textBox4_rate.Text);
-                int b = Int32.Parse(textBox5_qty.Text);
-                int total = a * b;
-                textBox_total.Text = "" + total;
+
+                double a = Double.Parse(textBox4_rate.Text);
+                double b = Double.Parse(textBox5_qty.Text);
+                double total = a * b;
+                textBox_total.Text = total.ToString();
             }
         }
 
