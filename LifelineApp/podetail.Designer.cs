@@ -246,8 +246,9 @@
             textBox_pid.Location = new Point(436, 57);
             textBox_pid.Name = "textBox_pid";
             textBox_pid.ReadOnly = true;
-            textBox_pid.Size = new Size(15, 23);
+            textBox_pid.Size = new Size(29, 23);
             textBox_pid.TabIndex = 22;
+            textBox_pid.TextChanged += textBox_pid_TextChanged;
             // 
             // cb1
             // 
@@ -272,7 +273,7 @@
             // tb1
             // 
             tb1.Anchor = AnchorStyles.None;
-            tb1.Location = new Point(688, 373);
+            tb1.Location = new Point(774, 409);
             tb1.Name = "tb1";
             tb1.Size = new Size(191, 23);
             tb1.TabIndex = 25;

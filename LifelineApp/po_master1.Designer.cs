@@ -45,6 +45,11 @@
             label6 = new Label();
             label8 = new Label();
             ft = new Label();
+            l7 = new Label();
+            label7 = new Label();
+            label9 = new Label();
+            label10 = new Label();
+            label11 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -122,6 +127,7 @@
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.Anchor = AnchorStyles.None;
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(73, 195);
             dataGridView1.Name = "dataGridView1";
@@ -188,7 +194,7 @@
             // 
             label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
-            label5.Location = new Point(73, 529);
+            label5.Location = new Point(94, 522);
             label5.Name = "label5";
             label5.Size = new Size(0, 15);
             label5.TabIndex = 18;
@@ -197,7 +203,7 @@
             // 
             label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
-            label6.Location = new Point(232, 529);
+            label6.Location = new Point(103, 594);
             label6.Name = "label6";
             label6.Size = new Size(0, 15);
             label6.TabIndex = 19;
@@ -206,7 +212,7 @@
             // 
             label8.Anchor = AnchorStyles.None;
             label8.AutoSize = true;
-            label8.Location = new Point(161, 529);
+            label8.Location = new Point(92, 555);
             label8.Name = "label8";
             label8.Size = new Size(0, 15);
             label8.TabIndex = 21;
@@ -215,16 +221,70 @@
             // 
             ft.Anchor = AnchorStyles.None;
             ft.AutoSize = true;
-            ft.Location = new Point(309, 552);
+            ft.Location = new Point(432, 591);
             ft.Name = "ft";
             ft.Size = new Size(0, 15);
             ft.TabIndex = 22;
+            // 
+            // l7
+            // 
+            l7.AutoSize = true;
+            l7.Location = new Point(415, 138);
+            l7.Name = "l7";
+            l7.Size = new Size(38, 15);
+            l7.TabIndex = 23;
+            l7.Text = "label7";
+            // 
+            // label7
+            // 
+            label7.Anchor = AnchorStyles.None;
+            label7.AutoSize = true;
+            label7.Location = new Point(10, 518);
+            label7.Name = "label7";
+            label7.Size = new Size(61, 15);
+            label7.TabIndex = 24;
+            label7.Text = "Total price";
+            // 
+            // label9
+            // 
+            label9.Anchor = AnchorStyles.None;
+            label9.AutoSize = true;
+            label9.Location = new Point(-7, 591);
+            label9.Name = "label9";
+            label9.Size = new Size(82, 15);
+            label9.TabIndex = 25;
+            label9.Text = "Total Discount";
+            // 
+            // label10
+            // 
+            label10.Anchor = AnchorStyles.None;
+            label10.AutoSize = true;
+            label10.Location = new Point(-11, 555);
+            label10.Name = "label10";
+            label10.Size = new Size(90, 15);
+            label10.TabIndex = 26;
+            label10.Text = "Total - Discount";
+            // 
+            // label11
+            // 
+            label11.Anchor = AnchorStyles.None;
+            label11.AutoSize = true;
+            label11.Location = new Point(320, 591);
+            label11.Name = "label11";
+            label11.Size = new Size(73, 15);
+            label11.TabIndex = 27;
+            label11.Text = "Net Amount";
             // 
             // po_master1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1142, 637);
+            Controls.Add(label11);
+            Controls.Add(label10);
+            Controls.Add(label9);
+            Controls.Add(label7);
+            Controls.Add(l7);
             Controls.Add(ft);
             Controls.Add(label8);
             Controls.Add(label6);
@@ -270,5 +330,10 @@
         private Label label6;
         private Label label8;
         private Label ft;
+        private Label l7;
+        private Label label7;
+        private Label label9;
+        private Label label10;
+        private Label label11;
     }
 }

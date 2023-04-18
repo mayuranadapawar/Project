@@ -4,10 +4,14 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Mysqlx.Expr;
+using MySqlX.XDevAPI.Relational;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
@@ -15,8 +19,8 @@ namespace LifelineApp
 {
     public partial class podetail : Form
     {
-        double c, d, fgt, tt;
-
+        public int t,ban;
+        public double c, d, fgt, tt, pmr;
         MySqlConnection con = new MySqlConnection("server=115.96.168.103;user=prj131;pwd=prj131@lifeline;database=prj131lifeline;port=3306");
         MySqlDataAdapter da;
         DataTable dt = new DataTable("dlrmaster");
@@ -62,8 +66,8 @@ namespace LifelineApp
         {
 
             product();
-            po_master1 pom = new po_master1();
-            DataGridView dataGridView1 = pom.dataGridView1;
+            //po_master1 pom = new po_master1(new DataTable());
+            //DataGridView dataGridView1 = pom.dataGridView1;
 
         }
 
@@ -132,21 +136,37 @@ namespace LifelineApp
             {
                 a = Double.Parse(textBox6_dis.Text);
             }
-            
+
             tt = tt - a;
             fgt = (tt * fgt) / 100;
             fgt = fgt + tt;
             con.Open();
             string s = "insert into podetails(po_id,batch_no,expiry,mrp,rate,qty,total,discount,cgst,sgst,gst_total,free_qty) values('" + textBox_pid.Text + "'," + textBox1_batch.Text + ",'" + textBox2_ex.Text + "','" + textBox3_MRP.Text + "','" + textBox4_rate.Text + "','" + textBox5_qty.Text + "','" + textBox_total.Text + "','" + a + "','" + d + "','" + c + "','" + fgt + "','" + textBox7_free.Text + "')";
             cmd = new MySqlCommand(s, con);
+            DataTable dt = new DataTable();
+
+            t = Convert.ToInt32(textBox_pid.Text);
+            ban = Convert.ToInt32(textBox1_batch.Text);
+            pmr = a;
+
+            /*dt.Columns.Add("po_id");
+            dt.Columns.Add("batch_no");
+            dt.Columns.Add("expiry");
+            dt.Columns.Add("mrp");
+            dt.Columns.Add("rate");
+            dt.Columns.Add("qty");
+            dt.Columns.Add("total");
+            dt.Columns.Add("discount");
+            dt.Columns.Add("free_qty");
+            dt.Rows.Add(textBox_pid.Text, textBox1_batch.Text, textBox2_ex.Text, textBox3_MRP.Text, textBox4_rate.Text, textBox5_qty.Text, textBox_total.Text, a, textBox7_free.Text);
+            //po_id,batch_no,expiry,mrp,rate,qty,total,discount,free_qty*/
             cmd.ExecuteNonQuery();
             MessageBox.Show("Dealer details inserted");
             con.Close();
 
             this.Close();
-            po_master1 p = new po_master1();
-            p.Show();
-
+            //po_master1 p = new po_master1(t,ban,pmr);
+            //p.dpm = Convert.ToDouble(textBox_pid.Text);
         }
 
         private void textBox5_qty_Leave(object sender, EventArgs e)
@@ -154,7 +174,7 @@ namespace LifelineApp
             if (textBox5_qty.Text.Equals("") || textBox4_rate.Text.Equals(""))
             {
                 /*
-                int a = Int32.Parse(textBox4_rate.Text);
+                int a = Int32.Parse(textBox4_ra te.Text);
                 int b = Int32.Parse(textBox5_qty.Text);
                 int total = a * b;
                 textBox_total.Text = "" + total;
@@ -207,6 +227,11 @@ namespace LifelineApp
         }
 
         private void textBox5_qty_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox_pid_TextChanged(object sender, EventArgs e)
         {
 
         }

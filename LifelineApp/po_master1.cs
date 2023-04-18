@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Mysqlx.Expr;
+using MySqlX.XDevAPI.Relational;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
@@ -17,138 +19,145 @@ namespace LifelineApp
     public partial class po_master1 : Form
     {
         public void updatedata()
-        {
+        { 
             double gst = 0;
             con.Open();
-            DataTable table = new DataTable();
-            string qry = "select po_id,batch_no,expiry,mrp,rate,qty,total,discount,free_qty from podetails";
-
+            /*string qry = "select po_id,batch_no,expiry,mrp,rate,qty,total,discount,free_qty from podetails where po_id='" + dpm + "' And batch_no='" + batno + "' and total='" + mrp + "'";
             da = new MySqlDataAdapter(qry, con);
-            da.Fill(table);
+            da.Fill(data);
+            DataRow r;
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                // Access the current row
+                //DataRow r = table.Rows[i];
+                r = data.Rows[i];
+                DataRow destRow = table.NewRow();
+                destRow.ItemArray = r.ItemArray;
+                table.Rows.Add(destRow);
+
+                /*DataRow row = dt.Rows[i];
+                 
+                   
+                    newRow["po_id"] = dt.Columns[0];
+                    newRow["batch_no"] = dt.Columns[1];
+                    newRow["expiry"] = dt.Columns[2];
+                    newRow["mrp"] = dt.Columns[3];
+                    newRow["rate"] = dt.Columns[4];
+                    newRow["qty"] = dt.Columns[5];
+                    newRow["total"] = dt.Columns[6];
+                    newRow["discount"] = dt.Columns[7];
+                    newRow["free_qty"] = dt.Columns[8];
+
+
+                    
+
+                    // table.Columns.Add(c);
+                     
+                    //DataColumn dc = table.Columns[i];
+                    
+                    /*double to = Convert.ToDouble(row[c]);
+                    j++;
+                    c = table1.Columns[j];
+                    double di = Convert.ToDouble(row[c]);
+                    //calculating taxable amount
+                    double ta = to - di;
+                    l7.Text = ta.ToString();
+                    // calculating gst
+                    j++;
+                    c = table1.Columns[j];
+                    gst = gst + (ta * Convert.ToDouble(row[c])) / 100;
+                    break;
+                
+                table.Rows.Add(newRow);
+            }
+            table.Rows.Add(da);*/
+
             dataGridView1.DataSource = table;
+
             string q = "select sum(total) from podetails";
             cmd = new MySqlCommand(q, con);
             cmd.ExecuteNonQuery();
             MySqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
             //label5 is for price total
-            label5.Text = reader.GetString(0);
+            label5.Text = Math.Round(Double.Parse(reader.GetString(0)), 2).ToString();
             reader.Close();
+
             string qs = "select sum(discount) from podetails";
             cmd = new MySqlCommand(qs, con);
             cmd.ExecuteNonQuery();
             MySqlDataReader reader1 = cmd.ExecuteReader();
             reader1.Read();
-            //label6 is for total discount  1.26 1.31  2.59  1.6956  3.576  0.795       6.06  2.59
-            label6.Text = reader1.GetString(0);
+            //label6 is for total discount   
+            label6.Text = Math.Round(Double.Parse(reader1.GetString(0)), 2).ToString();
             reader1.Close();
             con.Close();
+
             double a = Double.Parse(label5.Text);
             double b = Double.Parse(label6.Text);
             //label8 is for total - discount
-            label8.Text = (a - b).ToString();
+            label8.Text = Math.Round(a - b, 2).ToString();
             con.Close();
             //new label for final total
             //getting sum of all total and discount with same gst
 
-
-
             string q1 = "select sum(total),sum(discount),sgst,cgst from podetails group by sgst";
             con.Open();
-            //cmd = new MySqlCommand(q1, con);
             DataTable table1 = new DataTable();
             da = new MySqlDataAdapter(q1, con);
             da.Fill(table1);
-            //dataGridView1.DataSource = table;
-            // Assume that you have fetched the data from your MySQL table and stored it in a DataTable called "myDataTable"
-
-            // Loop through each row in the DataTable
-            // Assume that you have fetched the data from your MySQL table and stored it in a DataTable called "myDataTable"
-
-            // Loop through each row in the DataTable
             for (int i = 0; i < table1.Rows.Count; i++)
             {
-                // Access the current row
                 DataRow row = table1.Rows[i];
                 for (int j = 0; j < table1.Columns.Count; i++)
                 {
                     DataColumn c = table1.Columns[j];
-                    // Access the values in each column of the row
-                    //in id = Convert.ToInt32(row["total"]);
-                    //string name = row["name"].ToString();
-                    //int age = Convert.ToInt32(row["age"]);
-
                     double to = Convert.ToDouble(row[c]);
                     j++;
                     c = table1.Columns[j];
                     double di = Convert.ToDouble(row[c]);
                     //calculating taxable amount
                     double ta = to - di;
+                    l7.Text = ta.ToString();
                     // calculating gst
                     j++;
                     c = table1.Columns[j];
                     gst = gst + (ta * Convert.ToDouble(row[c])) / 100;
                     break;
                 }
-                
+
             }
 
-            // Assume that you have fetched the data from your MySQL table and stored it in a DataTable called "myDataTable"
-
-            // Loop through each row in the DataTable
-            /*foreach (DataRow row in myDataTable.Rows)
-            {
-                // Loop through each column in the row
-                foreach (DataColumn column in myDataTable.Columns)
-                {
-                    // Access the value of the current cell in the row
-                    object cellValue = row[column];
-
-                    // Do something with the cell value here...
-                    Console.WriteLine("Cell value: " + cellValue);
-                }
-            }*/
-
-
-            //dr = cmd.ExecuteReader();
-
-            /*if (dr.HasRows)
-            {
-                while (dr.Read())
-                {
-                    double to = (double)dr[0];
-                    double di = (double)dr[1];
-                    //calculating taxable amount
-                    double ta = to - di;
-                    // calculating gst
-                    gst = gst + (ta * (double)dr[2]) / 100;
-                    //combobox_1p.Items.Add(dr[0].ToString());
-                    // a = dr[1].ToString();
-                    //string b = dr[2].ToString();
-                    //tb1.Text = b;
-                    // tb1.Text = (a + b).ToString();
-                }
-                dr.Close();
-            }
-
-            dr.Close();*/
+            //Final Amount
             double du = Double.Parse(label8.Text);
             gst = gst + gst + du;
-            ft.Text = gst.ToString();
+            ft.Text = Math.Round(gst, 2).ToString();
             con.Close();
 
             //select sum(total) from prj131lifeline.podetails group by po_id;
         }
         MySqlConnection con = new MySqlConnection("server=115.96.168.103;user=prj131;pwd=prj131@lifeline;database=prj131lifeline;port=3306");
         MySqlDataAdapter da;
-
         MySqlCommand cmd;
         MySqlDataReader dr;
         string DelearID = string.Empty;
-
+        int dpm, batno;
+        double mrp;
+        DataTable table = new DataTable();
+        DataTable data = new DataTable();
 
         public po_master1()
         {
+
+            table.Columns.Add("po_id");
+            table.Columns.Add("batch_no");
+            table.Columns.Add("expiry");
+            table.Columns.Add("mrp");
+            table.Columns.Add("rate");
+            table.Columns.Add("qty");
+            table.Columns.Add("total");
+            table.Columns.Add("discount");
+            table.Columns.Add("free_qty");
             InitializeComponent();
         }
 
@@ -163,20 +172,12 @@ namespace LifelineApp
             con.Open();
             dr = cmd.ExecuteReader();
             dr.Read();
-
-                    // a = dr[1].ToString();
-                    //string b = dr[2].ToString();
-                    //tb1.Text = b;
-                    // tb1.Text = (a + b).ToString();
             if (Convert.ToInt32(dr[0]) != 0)
             {
                 con.Close();
                 updatedata();
             }
-            //dr.Close();
             con.Close();
-            //a = Convert.ToInt16(reader1.GetString(0));
-           // reader1.Close();
         }
 
         public void deler()
@@ -230,7 +231,6 @@ namespace LifelineApp
             string sup = textBox_id.Text;
             string tr = textBox_trtype.Text;
             string bill = textBox1.Text;
-            //string dateValue = dateTimePicker1.Value.ToString("yyyy-MM-dd");
             string date = dateTimePicker1.Text;
             string s = "insert into pomaster(inc_date,sup_id,sup_bill_no,tr_tp) values('" + date + "','" + sup + "','" + bill + "','" + tr + "')";
             cmd = new MySqlCommand(s, con);
@@ -241,9 +241,18 @@ namespace LifelineApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
             podetail pod = new podetail();
-            pod.Show();
+            pod.ShowDialog();
+/*
+            dpm = pod.t;
+            batno = pod.ban;
+            mrp = pod.pmr;*/
+
+             
+            table.Rows.Add(pod.textBox_pid.Text, pod.textBox1_batch.Text, pod.textBox2_ex.Text, pod.textBox3_MRP.Text, pod.textBox4_rate.Text, pod.textBox5_qty.Text, pod.textBox_total.Text, pod.pmr, pod.textBox7_free.Text);
+
+            updatedata();
+            pod.Dispose();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -260,19 +269,23 @@ namespace LifelineApp
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
+                 
+                
+
                 DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
-
-
-                // Get the ID of the selected row from the underlying data source
                 int id = Convert.ToInt32(selectedRow.Cells["po_id"].Value);
+
+                table.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
                 con.Open();
+
+                //dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
 
                 string s = "delete from podetails where po_id='" + id + "'";
                 cmd = new MySqlCommand(s, con);
                 cmd.ExecuteNonQuery();
 
                 con.Close();
-                updatedata();
+                
                 MessageBox.Show("Record deleted!");
 
             }
