@@ -194,10 +194,11 @@
             // 
             label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
-            label5.Location = new Point(94, 522);
+            label5.Location = new Point(103, 522);
             label5.Name = "label5";
-            label5.Size = new Size(0, 15);
+            label5.Size = new Size(13, 15);
             label5.TabIndex = 18;
+            label5.Text = "0";
             // 
             // label6
             // 
@@ -205,17 +206,19 @@
             label6.AutoSize = true;
             label6.Location = new Point(103, 594);
             label6.Name = "label6";
-            label6.Size = new Size(0, 15);
+            label6.Size = new Size(13, 15);
             label6.TabIndex = 19;
+            label6.Text = "0";
             // 
             // label8
             // 
             label8.Anchor = AnchorStyles.None;
             label8.AutoSize = true;
-            label8.Location = new Point(92, 555);
+            label8.Location = new Point(103, 555);
             label8.Name = "label8";
-            label8.Size = new Size(0, 15);
+            label8.Size = new Size(13, 15);
             label8.TabIndex = 21;
+            label8.Text = "0";
             // 
             // ft
             // 
@@ -223,8 +226,9 @@
             ft.AutoSize = true;
             ft.Location = new Point(432, 591);
             ft.Name = "ft";
-            ft.Size = new Size(0, 15);
+            ft.Size = new Size(13, 15);
             ft.TabIndex = 22;
+            ft.Text = "0";
             // 
             // l7
             // 

@@ -19,7 +19,7 @@ namespace LifelineApp
 {
     public partial class podetail : Form
     {
-        public int t,ban;
+        public int t, ban;
         public double c, d, fgt, tt, pmr;
         MySqlConnection con = new MySqlConnection("server=115.96.168.103;user=prj131;pwd=prj131@lifeline;database=prj131lifeline;port=3306");
         MySqlDataAdapter da;

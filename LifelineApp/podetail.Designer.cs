@@ -88,7 +88,7 @@
             combobox_1p.Anchor = AnchorStyles.None;
             combobox_1p.FormattingEnabled = true;
             combobox_1p.ImeMode = ImeMode.On;
-            combobox_1p.Location = new Point(280, 57);
+            combobox_1p.Location = new Point(270, 61);
             combobox_1p.Name = "combobox_1p";
             combobox_1p.Size = new Size(150, 23);
             combobox_1p.TabIndex = 4;
@@ -98,7 +98,7 @@
             // 
             textBox1_batch.Anchor = AnchorStyles.None;
             textBox1_batch.ImeMode = ImeMode.On;
-            textBox1_batch.Location = new Point(280, 122);
+            textBox1_batch.Location = new Point(270, 126);
             textBox1_batch.Name = "textBox1_batch";
             textBox1_batch.Size = new Size(150, 23);
             textBox1_batch.TabIndex = 6;
@@ -107,7 +107,7 @@
             // 
             textBox2_ex.Anchor = AnchorStyles.None;
             textBox2_ex.ImeMode = ImeMode.On;
-            textBox2_ex.Location = new Point(280, 196);
+            textBox2_ex.Location = new Point(270, 200);
             textBox2_ex.Name = "textBox2_ex";
             textBox2_ex.Size = new Size(150, 23);
             textBox2_ex.TabIndex = 7;
@@ -117,7 +117,7 @@
             textBox6_dis.Anchor = AnchorStyles.None;
             textBox6_dis.Location = new Point(774, 126);
             textBox6_dis.Name = "textBox6_dis";
-            textBox6_dis.Size = new Size(150, 23);
+            textBox6_dis.Size = new Size(141, 23);
             textBox6_dis.TabIndex = 11;
             // 
             // textBox5_qty
@@ -125,7 +125,7 @@
             textBox5_qty.Anchor = AnchorStyles.None;
             textBox5_qty.Location = new Point(774, 52);
             textBox5_qty.Name = "textBox5_qty";
-            textBox5_qty.Size = new Size(150, 23);
+            textBox5_qty.Size = new Size(141, 23);
             textBox5_qty.TabIndex = 10;
             textBox5_qty.TextChanged += textBox5_qty_TextChanged;
             textBox5_qty.Leave += textBox5_qty_Leave;
@@ -154,7 +154,7 @@
             // 
             textBox4_rate.Anchor = AnchorStyles.None;
             textBox4_rate.ImeMode = ImeMode.On;
-            textBox4_rate.Location = new Point(283, 350);
+            textBox4_rate.Location = new Point(273, 354);
             textBox4_rate.Name = "textBox4_rate";
             textBox4_rate.Size = new Size(150, 23);
             textBox4_rate.TabIndex = 15;
@@ -167,7 +167,7 @@
             // 
             textBox3_MRP.Anchor = AnchorStyles.None;
             textBox3_MRP.ImeMode = ImeMode.On;
-            textBox3_MRP.Location = new Point(283, 276);
+            textBox3_MRP.Location = new Point(273, 280);
             textBox3_MRP.Name = "textBox3_MRP";
             textBox3_MRP.Size = new Size(150, 23);
             textBox3_MRP.TabIndex = 14;
@@ -197,7 +197,7 @@
             textBox7_free.Anchor = AnchorStyles.None;
             textBox7_free.Location = new Point(774, 218);
             textBox7_free.Name = "textBox7_free";
-            textBox7_free.Size = new Size(150, 23);
+            textBox7_free.Size = new Size(141, 23);
             textBox7_free.TabIndex = 18;
             textBox7_free.TextChanged += textBox7_TextChanged;
             // 
@@ -214,7 +214,8 @@
             // button1
             // 
             button1.Anchor = AnchorStyles.None;
-            button1.Location = new Point(499, 467);
+            button1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.Location = new Point(506, 502);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 19;
@@ -227,14 +228,14 @@
             textBox_total.Anchor = AnchorStyles.None;
             textBox_total.Location = new Point(774, 317);
             textBox_total.Name = "textBox_total";
-            textBox_total.Size = new Size(150, 23);
+            textBox_total.Size = new Size(141, 23);
             textBox_total.TabIndex = 21;
             // 
             // label11
             // 
             label11.Anchor = AnchorStyles.None;
             label11.AutoSize = true;
-            label11.Location = new Point(609, 325);
+            label11.Location = new Point(584, 325);
             label11.Name = "label11";
             label11.Size = new Size(39, 15);
             label11.TabIndex = 20;
@@ -264,7 +265,7 @@
             // 
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
-            label2.Location = new Point(595, 373);
+            label2.Location = new Point(584, 417);
             label2.Name = "label2";
             label2.Size = new Size(27, 15);
             label2.TabIndex = 24;
@@ -275,7 +276,7 @@
             tb1.Anchor = AnchorStyles.None;
             tb1.Location = new Point(774, 409);
             tb1.Name = "tb1";
-            tb1.Size = new Size(191, 23);
+            tb1.Size = new Size(141, 23);
             tb1.TabIndex = 25;
             // 
             // podetail

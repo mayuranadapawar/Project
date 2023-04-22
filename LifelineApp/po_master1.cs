@@ -18,10 +18,10 @@ namespace LifelineApp
 {
     public partial class po_master1 : Form
     {
-        public void updatedata()
-        { 
-            double gst = 0;
-            con.Open();
+        public void updatedata(double tot, double totdis, double gst)
+        {
+            //double gst = 0;
+           // con.Open();
             /*string qry = "select po_id,batch_no,expiry,mrp,rate,qty,total,discount,free_qty from podetails where po_id='" + dpm + "' And batch_no='" + batno + "' and total='" + mrp + "'";
             da = new MySqlDataAdapter(qry, con);
             da.Fill(data);
@@ -73,14 +73,25 @@ namespace LifelineApp
             table.Rows.Add(da);*/
 
             dataGridView1.DataSource = table;
+            total = total + tot;
+            label5.Text = total.ToString();
 
-            string q = "select sum(total) from podetails";
+            tot_disc = tot_disc + totdis;
+            label6.Text = tot_disc.ToString();
+
+            diftotdis = total - totdis;
+            label8.Text = diftotdis.ToString();
+
+            gst_tot = gst_tot + gst;
+            ft.Text = Math.Round(gst_tot, 2).ToString();
+
+            /*string q = "select sum(total) from podetails";
             cmd = new MySqlCommand(q, con);
             cmd.ExecuteNonQuery();
             MySqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
             //label5 is for price total
-            label5.Text = Math.Round(Double.Parse(reader.GetString(0)), 2).ToString();
+             //Math.Round(Double.Parse(reader.GetString(0)), 2).ToString();
             reader.Close();
 
             string qs = "select sum(discount) from podetails";
@@ -89,14 +100,14 @@ namespace LifelineApp
             MySqlDataReader reader1 = cmd.ExecuteReader();
             reader1.Read();
             //label6 is for total discount   
-            label6.Text = Math.Round(Double.Parse(reader1.GetString(0)), 2).ToString();
+            
             reader1.Close();
             con.Close();
 
             double a = Double.Parse(label5.Text);
             double b = Double.Parse(label6.Text);
             //label8 is for total - discount
-            label8.Text = Math.Round(a - b, 2).ToString();
+            
             con.Close();
             //new label for final total
             //getting sum of all total and discount with same gst
@@ -131,10 +142,10 @@ namespace LifelineApp
             //Final Amount
             double du = Double.Parse(label8.Text);
             gst = gst + gst + du;
-            ft.Text = Math.Round(gst, 2).ToString();
+            
             con.Close();
 
-            //select sum(total) from prj131lifeline.podetails group by po_id;
+            //select sum(total) from prj131lifeline.podetails group by po_id;*/
         }
         MySqlConnection con = new MySqlConnection("server=115.96.168.103;user=prj131;pwd=prj131@lifeline;database=prj131lifeline;port=3306");
         MySqlDataAdapter da;
@@ -142,7 +153,7 @@ namespace LifelineApp
         MySqlDataReader dr;
         string DelearID = string.Empty;
         int dpm, batno;
-        double mrp;
+        double mrp,total = 0, tot_disc = 0, diftotdis = 0, gst_tot = 0;
         DataTable table = new DataTable();
         DataTable data = new DataTable();
 
@@ -175,7 +186,7 @@ namespace LifelineApp
             if (Convert.ToInt32(dr[0]) != 0)
             {
                 con.Close();
-                updatedata();
+               // updatedata();
             }
             con.Close();
         }
@@ -243,15 +254,15 @@ namespace LifelineApp
         {
             podetail pod = new podetail();
             pod.ShowDialog();
-/*
-            dpm = pod.t;
-            batno = pod.ban;
-            mrp = pod.pmr;*/
+            /*
+                        dpm = pod.t;
+                        batno = pod.ban;
+                        mrp = pod.pmr;*/
 
-             
+
             table.Rows.Add(pod.textBox_pid.Text, pod.textBox1_batch.Text, pod.textBox2_ex.Text, pod.textBox3_MRP.Text, pod.textBox4_rate.Text, pod.textBox5_qty.Text, pod.textBox_total.Text, pod.pmr, pod.textBox7_free.Text);
 
-            updatedata();
+            updatedata(Double.Parse(pod.textBox_total.Text), pod.pmr, pod.fgt);
             pod.Dispose();
         }
 
@@ -269,8 +280,8 @@ namespace LifelineApp
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                 
-                
+
+
 
                 DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
                 int id = Convert.ToInt32(selectedRow.Cells["po_id"].Value);
@@ -285,7 +296,7 @@ namespace LifelineApp
                 cmd.ExecuteNonQuery();
 
                 con.Close();
-                
+
                 MessageBox.Show("Record deleted!");
 
             }
